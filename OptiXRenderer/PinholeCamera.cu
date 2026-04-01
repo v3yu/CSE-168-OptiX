@@ -16,7 +16,11 @@ rtDeclareVariable(int1, frameID, , );
 
 // Camera info 
 
-// TODO:: delcare camera varaibles here
+rtDeclareVariable(float3, eye, , );
+rtDeclareVariable(float3, center, , );
+rtDeclareVariable(float3, up, , );
+rtDeclareVariable(float, fovY, , );
+
 
 RT_PROGRAM void generateRays()
 {

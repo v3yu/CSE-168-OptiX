@@ -35,6 +35,9 @@ class Renderer
     // Some info about the output image
     std::string outputFilename;
     unsigned int width, height;
+    // Camera parameters
+    optix::float3 eye, center, up;
+    float fovY;
 
     /**
      * A helper function for readability. One should initialize all the Optix
@@ -82,4 +85,8 @@ public:
     int getNumFrames() { return numFrames; }
     int getCurrentFrame() { return currentFrame; }
     optix::Buffer& getResultBuffer() { return resultBuffer; }
+    optix::float3 getEye() { return eye; }
+    optix::float3 getCenter() { return center; }
+    optix::float3 getUp() { return up; }
+    float getFovY() { return fovY; }
 };

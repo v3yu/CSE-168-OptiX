@@ -22,11 +22,16 @@ struct Scene
     std::vector<DirectionalLight> dlights;
     std::vector<PointLight> plights;
 
-    // TODO: add other variables that you need here
+    optix::float3 eye, center, up;
+    float fovY;
 
     Scene()
     {
         outputFilename = "raytrace.png";
         integratorName = "raytracer";
+        eye = optix::make_float3(0.0f, 0.0f, 0.0f);
+        center = optix::make_float3(0.0f, 0.0f, -1.0f);
+        up = optix::make_float3(0.0f, 1.0f, 0.0f);
+        fovY = 45.0f;
     }
 };

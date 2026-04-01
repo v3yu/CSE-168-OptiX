@@ -126,6 +126,10 @@ void Renderer::buildScene()
     outputFilename = scene->outputFilename;
     currentFrame = 0;
     numFrames = 1;
+    eye = scene->eye;
+    center = scene->center;
+    up = scene->up;
+    fovY = scene->fovY;
 
     // Set width and height
     resultBuffer->setSize(width, height);
@@ -139,13 +143,17 @@ void Renderer::buildScene()
     material->setClosestHitProgram(0, programs["integrator"]);
     material->setAnyHitProgram(1, programs["shadowCaster"]);
 
-    // TODO: pass data to programs here
+    // Pass data to ray generation program
+    programs["rayGen"]["eye"]->set(eye);
+    programs["rayGen"]["center"]->set(center);
+    programs["rayGen"]["up"]->set(up);
+    programs["rayGen"]["fovY"]->set(fovY);
 
     // Create buffers and pass them to Optix programs that the buffers
     Buffer triBuffer = createBuffer(scene->triangles);
     programs["triInt"]["triangles"]->set(triBuffer);
     programs["triBound"]["triangles"]->set(triBuffer);
-
+  
     Buffer sphereBuffer = createBuffer(scene->spheres);
     programs["sphereInt"]["spheres"]->set(sphereBuffer);
     programs["sphereBound"]["spheres"]->set(sphereBuffer);

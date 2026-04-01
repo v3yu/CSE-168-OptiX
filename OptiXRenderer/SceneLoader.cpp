@@ -78,7 +78,24 @@ std::shared_ptr<Scene> SceneLoader::load(std::string sceneFilename)
             scene->outputFilename = svalues[0];
         }
         // TODO: use the examples above to handle other commands
-    }
+
+        else if (cmd == "eye" && readValues(s, 3, fvalues))
+        {
+            scene->eye = optix::make_float3(fvalues[0], fvalues[1], fvalues[2]);
+        }
+        else if (cmd == "center" && readValues(s, 3, fvalues))
+        {
+            scene->center = optix::make_float3(fvalues[0], fvalues[1], fvalues[2]);
+        }
+        else if (cmd == "up" && readValues(s, 3, fvalues))
+        {
+            scene->up = optix::make_float3(fvalues[0], fvalues[1], fvalues[2]);
+        }
+        else if (cmd == "fovY" && readValues(s, 1, fvalues))
+        {
+            scene->fovY = fvalues[0];
+        }
+    } 
 
     in.close();
 
